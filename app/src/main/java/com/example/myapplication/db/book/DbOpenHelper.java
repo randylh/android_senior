@@ -12,8 +12,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
     private static final int DB_VERSION = 1;
 
-    private static final String BOOK_TABLE_NAME = "book";
-    private static final String USER_TABLE_NAME = "user";
+    public static final String BOOK_TABLE_NAME = "book";
+    public static final String USER_TABLE_NAME = "user";
 
     // sql 语句
     private String CREATE_BOOK_TABLE = "CREATE TABLE IF NOT EXISTS " + BOOK_TABLE_NAME + "(_id INTEGER PRIMARY KEY," + "name TEXT)";
