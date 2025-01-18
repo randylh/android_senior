@@ -2,3 +2,67 @@
 plugins {
 alias(libs.plugins.android.application) apply false
 }
+
+class MyTestTask extends DefaultTask {
+
+    @Internal
+    def taskName = "default"
+
+    @TaskAction
+    def Action1() {
+        println("$taskName ----> Action1")
+    }
+
+    @TaskAction
+    def Action2() {
+        println("$taskName ----> Action2")
+    }
+}
+//tasks.register("mytest", MyTestTask) {
+//    taskName = "testName"
+//    it.doFirst {
+//        println("${it.name} = doFirst 1")
+//    }
+//
+//    it.doFirst {
+//        println("${it.name} = doFirst 2")
+//    }
+//
+//    println("Task name = " + it.name)
+//
+//    it.doLast {
+//        println("${it.name} = doFirst 3")
+//    }
+//
+//    it.doLast {
+//        println("${it.name} = doFirst 4")
+//    }
+//}
+
+
+//tasks.register('hello') {
+//    println("hello world")
+//}
+
+
+tasks.register("mytest1") {
+    it.configure {
+        description "执行 mytest1"
+        group "help"
+        dependsOn(provider {
+            tasks.findAll {
+                it.name.contains("mytest2")
+            }
+        })
+    }
+
+    it.doLast {
+        println("Task name is ${it.name}")
+    }
+}
+
+tasks.register("mytest2") {
+    it.doLast {
+        println("Task name is ${it.name}")
+    }
+}

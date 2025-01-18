@@ -25,6 +25,10 @@
 
         <activity android:name=".ProviderActivity"/>
         <activity android:name=".JniActivity"/>
+        <activity android:name=".hook.binder_hook.BinderHookActivity"/>
+        <activity android:name=".component.service.ServiceActivity"/>
+        <activity android:name=".component.service.binder.BinderActivity"/>
+        <activity android:name=".hook.ams_pms_hook.AmsPmsHookActivity"/>
 
         <!-- provider -->
         <provider
@@ -32,8 +36,11 @@
             android:name=".ipc.provider.BookProvider"
             android:permission="com.example.PROVIDER"
             android:process=":provider">
-
         </provider>
+
+        <!-- service -->
+        <service android:name=".component.service.SimpleService"/>
+        <service android:name=".component.service.binder.LocalService"/>
     </application>
 
 </manifest>

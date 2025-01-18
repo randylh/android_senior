@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.ProviderActivity;
 import com.example.myapplication.databinding.FragmentDashboardBinding;
+import com.example.myapplication.hook.binder_hook.BinderHookActivity;
 
 public class DashboardFragment extends Fragment {
 
@@ -33,6 +34,13 @@ public class DashboardFragment extends Fragment {
         textView.setOnClickListener(v -> {
             // TODO 跳转ProviderActivity  测试ContentProvider
             Intent intent = new Intent(getActivity(), ProviderActivity.class);
+            startActivity(intent);
+        });
+
+        final TextView textView2 = binding.textTest;
+        textView2.setOnClickListener(v -> {
+            // TODO
+            Intent intent = new Intent(getActivity(), BinderHookActivity.class);
             startActivity(intent);
         });
         return root;
