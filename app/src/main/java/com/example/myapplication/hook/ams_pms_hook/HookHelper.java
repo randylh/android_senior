@@ -8,6 +8,7 @@ import java.lang.reflect.Proxy;
 
 /**
  * https://github.com/Jeremy-linkt/AndroidHookDemo
+ * https://github.com/jeanboydev/Android-ReadTheFuckingSourceCode/blob/master/article/android/plugin/04_hook_ams.md
  */
 public class HookHelper {
     private static final String TAG = HookHandler.class.getSimpleName();
