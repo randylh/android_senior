@@ -9,4 +9,9 @@ public class MainApplication extends Application {
     public SharedPreferences getSharedPreferences(String name, int mode) {
         return super.getSharedPreferences(name, mode);
     }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
 }

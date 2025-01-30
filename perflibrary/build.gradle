@@ -1,0 +1,53 @@
+plugins {
+//    alias(libs.plugins.android.library)
+    id 'groovy'
+    id 'maven-publish'
+}
+
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    // TODO 不适用
+    implementation("com.android.tools.build:gradle:4.1.3")
+
+    implementation 'org.ow2.asm:asm:7.1'
+    implementation 'org.ow2.asm:asm-commons:7.1'
+}
+
+afterEvaluate {
+    publishing {
+        repositories {
+            maven {
+                // $rootDir 表示你项目的根目录
+                // 这里配置发布到的本地目录
+                url = uri("$rootDir/repo")
+            }
+        }
+
+        publications {
+            maven(MavenPublication) {
+
+                // 插件的组ID，建议设置为插件的包名
+                groupId = 'com.perf.plugin'
+                // 插件的名字，后续在引用时会用到
+                artifactId = 'myplugin'
+                version = '1.0.0'
+                // 组件类型
+                from components.java
+            }
+        }
+    }
+}
+
+
+//dependencies {
+//
+//    implementation libs.appcompat
+//    implementation libs.material
+//    testImplementation libs.junit
+//    androidTestImplementation libs.ext.junit
+//    androidTestImplementation libs.espresso.core
+//
+//    implementation("org.codehaus.groovy:groovy-all:3.0.14")
+//}

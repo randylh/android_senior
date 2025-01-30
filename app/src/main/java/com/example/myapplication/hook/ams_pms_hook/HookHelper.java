@@ -1,9 +1,12 @@
 package com.example.myapplication.hook.ams_pms_hook;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
@@ -13,7 +16,7 @@ import java.lang.reflect.Proxy;
 public class HookHelper {
     private static final String TAG = HookHandler.class.getSimpleName();
 
-        public static void hookActivityManager() {
+        public static void hookActivityManager(Context context) {
 
             Field activityManagerSingletonField = null;
             // 最终想要拿到的对象类型
@@ -36,7 +39,7 @@ public class HookHelper {
                     clazz = Class.forName("android.app.IActivityManager");
                 }
                 activityManagerSingletonField.setAccessible(true);
-
+                // 首先获取gDefault这个对象
                 Object gDefault = activityManagerSingletonField.get(null);
                 Log.i(TAG, "gDefault: " + gDefault);
                 // 去除单例对象里面的字段
@@ -48,13 +51,39 @@ public class HookHelper {
                 Log.i(TAG, "instance: " + instance);
 
                 // 动态代理，使用asmProxy代理对象，替换掉原来的IActivityManager对象
-                HookHandler hookHandler = new HookHandler(instance);
+                HookHandler hookHandler = new HookHandler(instance, context);
                 Object proxy = Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),
                         new Class[]{clazz}, hookHandler);
                 mInstanceField.set(gDefault, proxy);
 
             }catch (Exception e) {
                 Log.e(TAG, "hookActivityManager: ", e);
+            }
+        }
+
+        public static void hookPackageManager(Context context) {
+            try {
+                Class<?> activityThreadClass = Class.forName("android.app.ActivityThread");
+                Method currentActivityThreadMethod = activityThreadClass.getDeclaredMethod("currentActivityThread");
+                Object currentActivityThread = currentActivityThreadMethod.invoke(null);
+
+                Field sPackageManagerField = activityThreadClass.getDeclaredField("sPackageManager");
+                sPackageManagerField.setAccessible(true);
+                Object sPackageManager = sPackageManagerField.get(null);
+
+
+                // 代理对象
+                Class<?> iPackageManagerInterface = Class.forName("android.content.pm.IPackageManager");
+                Object proxy = Proxy.newProxyInstance(iPackageManagerInterface.getClassLoader(),
+                        new Class[]{iPackageManagerInterface}, new HookHandler(sPackageManager, context));
+
+                sPackageManagerField.set(currentActivityThread, proxy);
+                PackageManager pm = context.getPackageManager();
+                Field mPmField = pm.getClass().getDeclaredField("mPM");
+                mPmField.setAccessible(true);
+                mPmField.set(pm, proxy);
+            }catch (Exception e) {
+                Log.e(TAG, "hookPackageManager: ", e);
             }
         }
 }

@@ -24,7 +24,8 @@ public class AmsPmsHookActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        HookHelper.hookActivityManager();
+        HookHelper.hookActivityManager(newBase);
+        HookHelper.hookPackageManager(newBase);
         super.attachBaseContext(newBase);
     }
 

@@ -1,0 +1,42 @@
+plugins {
+    id 'java-library'
+    id 'groovy'
+    id 'maven-publish'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+
+afterEvaluate {
+    publishing {
+        repositories {
+            maven {
+                // $rootDir 表示你项目的根目录
+                // 这里配置发布到的本地目录
+                url = uri("$rootDir/repo")
+            }
+        }
+
+        publications {
+            maven(MavenPublication) {
+
+                // 插件的组ID，建议设置为插件的包名
+                groupId = 'com.router.plugin'
+                // 插件的名字，后续在引用时会用到
+                artifactId = 'interfaces'
+                version = '1.0.0'
+                // 组件类型
+                from components.java
+            }
+        }
+    }
+}

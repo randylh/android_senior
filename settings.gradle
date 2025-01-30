@@ -12,6 +12,7 @@ pluginManagement {
             }
         }
         mavenCentral()
+        mavenLocal()
         gradlePluginPortal()
     }
 }
@@ -22,9 +23,15 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {//配置repo目录为本地Maven仓库地址，这样就能本地引用刚才发布的asmrock插件了
+            url = uri("$rootDir/repo")
+        }
     }
 }
 
 rootProject.name = "My Application"
 include ':app'
 include ':serverapplication'
+include ':perflibrary'
+include ':compiler'
+include ':interfaces'

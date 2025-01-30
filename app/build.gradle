@@ -1,6 +1,11 @@
+import com.android.build.api.transform.Transform
+
 plugins {
     alias(libs.plugins.android.application)
 }
+
+// TODO gradle8.0中已经不支持registerTransform的api了，需要使用新的方式
+//apply plugin: 'perfplugin'
 
 android {
     namespace 'com.example.myapplication'
@@ -58,6 +63,7 @@ android {
             jniLibs.srcDirs = ['src/main/jniLibs'] // 确保这一行存在
         }
     }
+
 }
 
 dependencies {
