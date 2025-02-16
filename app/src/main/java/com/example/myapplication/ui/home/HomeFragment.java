@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
 
 import com.example.myapplication.component.service.ServiceActivity;
 import com.example.myapplication.component.service.binder.BinderActivity;
@@ -25,7 +27,6 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -99,7 +100,6 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
-
 
 
     private void requestQuestion() {

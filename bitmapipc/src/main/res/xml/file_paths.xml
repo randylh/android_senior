@@ -1,0 +1,4 @@
+<!-- app/src/main/res/xml/file_paths.xml -->
+<paths>
+    <cache-path name="shared_bitmap" path="."/>
+</paths>

@@ -10,12 +10,15 @@ buildscript {
     dependencies {
         classpath libs.gradle
 //        classpath libs.myplugin // 引用perfplugin插件
+//        classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.3'
+//        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.35.1'
     }
 }
 
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
+//    id 'dagger.hilt.android.plugin'
 }
 
 tasks.register('clean', Delete) {
