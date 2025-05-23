@@ -98,6 +98,11 @@ public class HomeFragment extends Fragment {
             getActivity().startActivity(intent);
         });
 
+        final TextView testConstraintLayout = binding.testConstraintLayout;
+        testConstraintLayout.setOnClickListener(v -> {
+//            https://juejin.cn/post/6911710012750430215
+        });
+
         return root;
     }
 

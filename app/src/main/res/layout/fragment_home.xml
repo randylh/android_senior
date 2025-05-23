@@ -74,4 +74,15 @@
         android:textColor="@color/purple_700"
         android:layout_marginTop="30dp"
         android:textSize="20sp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/test_constraint_layout"
+        android:text="测试ConstraintLayout"
+        android:textAlignment="center"
+        android:textColor="@color/purple_700"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"/>
 </LinearLayout>

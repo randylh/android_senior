@@ -2,6 +2,7 @@ import com.android.build.api.transform.Transform
 
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 // TODO gradle8.0中已经不支持registerTransform的api了，需要使用新的方式
@@ -63,6 +64,9 @@ android {
             jniLibs.srcDirs = ['src/main/jniLibs'] // 确保这一行存在
         }
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 
 }
 
@@ -75,6 +79,7 @@ dependencies {
     implementation libs.lifecycle.viewmodel.ktx
     implementation libs.navigation.fragment
     implementation libs.navigation.ui
+    implementation libs.core.ktx
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
@@ -89,5 +94,8 @@ dependencies {
 
     implementation "com.google.dagger:hilt-android:2.35.1"
     annotationProcessor "com.google.dagger:hilt-android-compiler:2.35.1"
+
+    implementation 'com.facebook.fresco:fresco:3.6.0'
+
 
 }
