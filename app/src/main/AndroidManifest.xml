@@ -33,6 +33,7 @@
         <activity android:name=".component.service.ServiceActivity"/>
         <activity android:name=".component.service.binder.BinderActivity"/>
         <activity android:name=".hook.ams_pms_hook.AmsPmsHookActivity"/>
+        <activity android:name=".LifecycleTestActivity"/>
 
         <!-- provider -->
         <provider
