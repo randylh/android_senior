@@ -96,6 +96,7 @@ dependencies {
     annotationProcessor "com.google.dagger:hilt-android-compiler:2.35.1"
 
     implementation 'com.facebook.fresco:fresco:3.6.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
 
 
 }
